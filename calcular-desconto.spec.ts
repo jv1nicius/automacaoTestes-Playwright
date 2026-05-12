@@ -1,4 +1,3 @@
-// tests/calcular-desconto.spec.ts
 import { test } from '@playwright/test';
 import { ProductListPage } from '../pages/ProductListPage';
 import { DiscountFormPage } from '../pages/DiscountFormPage';
@@ -60,18 +59,15 @@ test('CT04: Calcular Desconto - Cliente A, Quantidade 1-99', async ({ page }) =>
     const discountFormPage = new DiscountFormPage(page);
     const discountResultPage = new DiscountResultPage(page);
 
-    // A - Arrange
     const quantidade = 99;
     const tipoDeCliente = 'A';
 
     await productListPage.goto();
     await productListPage.selecionarPrimeiroProdutoParaCalculo();
 
-    // A - Act
     await discountFormPage.preencherFormulario(tipoDeCliente, quantidade);
     await discountFormPage.calcularDesconto();
 
-    // A - Assert
     await discountResultPage.validarTipoDeCliente(tipoDeCliente);
     await discountResultPage.validarQuantidade(quantidade);
     await discountResultPage.validarFatorDeDesconto('0,90');
@@ -83,18 +79,15 @@ test('CT05: Calcular Desconto - Cliente B, Quantidade 1-99', async ({ page }) =>
     const discountFormPage = new DiscountFormPage(page);
     const discountResultPage = new DiscountResultPage(page);
 
-    // Arrange
     const quantidade = 99;
     const tipoDeCliente = 'B';
 
     await productListPage.goto();
     await productListPage.selecionarPrimeiroProdutoParaCalculo();
 
-    // Act
     await discountFormPage.preencherFormulario(tipoDeCliente, quantidade);
     await discountFormPage.calcularDesconto();
 
-    // Assert
     await discountResultPage.validarTipoDeCliente(tipoDeCliente);
     await discountResultPage.validarQuantidade(quantidade);
     await discountResultPage.validarFatorDeDesconto('0,85');
